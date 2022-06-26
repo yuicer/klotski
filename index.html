@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Klotski</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+  <style>
+    html,
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    #app {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #lottie {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 50vh;
+      z-index: 9;
+      pointer-events: none;
+    }
+    canvas {
+      display: block;
+      cursor: pointer;
+      margin: 0 auto;
+    }
+  </style>
+</html>

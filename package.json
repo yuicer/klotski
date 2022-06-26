@@ -1,0 +1,19 @@
+{
+  "name": "klotski",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "sh deploy.sh"
+  },
+  "dependencies": {
+    "@lottiefiles/lottie-player": "1.5.7",
+    "pixi.js": "6.4.2"
+  },
+  "devDependencies": {
+    "typescript": "4.5.4",
+    "vite": "2.9.0"
+  }
+}
