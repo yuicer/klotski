@@ -1,0 +1,1 @@
+html,body{padding:0;margin:0}#app{position:absolute;width:100vw;height:100vh;overflow:hidden}#lottie{position:absolute;bottom:0;left:0;height:50vh;z-index:9;pointer-events:none}canvas{display:block;cursor:pointer;margin:0 auto}
