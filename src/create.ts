@@ -1,9 +1,7 @@
 import * as PIXI from 'pixi.js';
-import { rectLength, size } from './config';
 import { IContainer, posGraphics } from './main';
-import type { EmptyPosition } from './empty-position';
 
-function create(emptyPosition: EmptyPosition, container: IContainer) {
+function create(size: number, container: IContainer, rectLength: number) {
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
       // 华容道删一个

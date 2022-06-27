@@ -1,20 +1,39 @@
-import { rectLength, size, randomCount } from './config';
+import { randomCount } from './config';
 import type { EmptyPosition } from './empty-position';
 import { IContainer } from './main';
 
 type IDirection = 'top' | 'right' | 'bottom' | 'left';
 
-function random(emptyPosition: EmptyPosition, container: IContainer) {
-  for (let i = 0; i < randomCount; i++) {
-    loop(emptyPosition, container);
+function random(
+  size: number,
+  emptyPosition: EmptyPosition,
+  container: IContainer,
+  rectLength: number
+) {
+  let path: IDirection[] = [];
+  let realCount = randomCount === 1 ? 1 : randomCount + size * 5;
+  for (let i = 0; i < realCount; i++) {
+    loop(size, emptyPosition, container, rectLength, path);
   }
+
+  // @ts-ignore
+  window.path = path;
 }
-function loop(emptyPosition: EmptyPosition, container: IContainer) {
+function loop(
+  size: number,
+  emptyPosition: EmptyPosition,
+  container: IContainer,
+  rectLength: number,
+  path: IDirection[]
+) {
   const direction = getRandomRelativeRectPos(
     emptyPosition.x,
     emptyPosition.y,
-    size
+    size,
+    path.length > 0 ? path[path.length - 1] : undefined
   );
+
+  path.push(direction);
 
   if (direction === 'top') {
     const rect = container.children.find((c) => {
@@ -58,7 +77,8 @@ function loop(emptyPosition: EmptyPosition, container: IContainer) {
 function getRandomRelativeRectPos(
   x: number,
   y: number,
-  size: number
+  size: number,
+  preDirection?: IDirection
 ): IDirection {
   const map: {
     top?: any;
@@ -71,6 +91,11 @@ function getRandomRelativeRectPos(
     bottom: 1,
     left: 1,
   };
+  if (preDirection) {
+    const walkedDirection = getOppositeDirection(preDirection);
+    delete map[walkedDirection];
+  }
+
   if (x === size - 1) delete map.right;
   else if (x === 0) delete map.left;
 
@@ -84,3 +109,10 @@ function getRandomRelativeRectPos(
   return direction;
 }
 export { random };
+
+function getOppositeDirection(direction: IDirection): IDirection {
+  if (direction === 'top') return 'bottom';
+  else if (direction === 'bottom') return 'top';
+  else if (direction === 'left') return 'right';
+  else return 'left';
+}

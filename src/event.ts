@@ -1,10 +1,11 @@
-import { rectLength, size } from './config';
 import type { EmptyPosition } from './empty-position';
 import { IContainer } from './main';
 
 export function event(
+  size: number,
   emptyPosition: EmptyPosition,
   container: IContainer,
+  rectLength: number,
   callback: () => void
 ) {
   container.children.forEach((rect) => {
@@ -28,14 +29,14 @@ export function event(
         rect.pos.x -= 1;
       }
 
-      if (checkWin(container)) {
+      if (checkWin(size, container)) {
         callback();
       }
     });
   });
 }
 
-function checkWin(container: IContainer) {
+function checkWin(size: number, container: IContainer) {
   let result = true;
   if (
     container.children.find(

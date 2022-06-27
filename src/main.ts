@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js';
 import { lottie } from './lottie';
 import {
   padding,
-  size,
+  initialSize,
   length,
   containerOpacity,
   backgroundColor,
@@ -40,8 +40,7 @@ const container = new PIXI.Container() as IContainer;
 container.x = padding;
 container.y = padding;
 app.stage.addChild(container);
-
-const emptyPosition = new EmptyPosition(size);
+let size = initialSize;
 
 const winCallback = () => {
   setTimeout(() => {
@@ -53,12 +52,16 @@ const winCallback = () => {
 };
 
 function gameStart() {
+  const emptyPosition = new EmptyPosition(size);
+  const rectLength = (length - padding * 2) / size;
   // 初始化 size*size 棋盘
-  create(emptyPosition, container);
+  create(size, container, rectLength);
   // event
-  event(emptyPosition, container, winCallback);
+  event(size, emptyPosition, container, rectLength, winCallback);
   // 乱序开局
-  random(emptyPosition, container);
+  random(size, emptyPosition, container, rectLength);
+  // 升阶
+  size++;
 }
 
 function controller() {

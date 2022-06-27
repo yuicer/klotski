@@ -2,18 +2,18 @@
 const length = Math.min(Math.min(window.innerWidth, window.innerHeight), 600);
 // 页面 padding
 const padding = 20;
-// 方块大小
-const rectLength = (length - padding * 2) / 4;
 // 棋盘大小
-const size = 4;
+let initialSize = 3;
+let size = getSearch('size');
+
+if (+size >= initialSize) initialSize = +size;
+
 // 乱序生成步数
 let randomCount = 50;
 const hard = getSearch('hard');
 
 if (+hard === 0) randomCount = 1;
-if (+hard === 1) randomCount = 10;
-if (+hard === 2) randomCount = 20;
-if (+hard === 3) randomCount = 30;
+if (+hard === 1) randomCount = 30;
 
 const backgroundColor = 0xffffff;
 const containerOpacity = 0.2;
@@ -34,8 +34,7 @@ function getSearch(key?: string) {
 export {
   length,
   padding,
-  rectLength,
-  size,
+  initialSize,
   randomCount,
   backgroundColor,
   containerOpacity,
